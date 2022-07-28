@@ -1,0 +1,80 @@
+01. carregar sons preload()
+
+02. precisamos de efeitos sonoros quando: 
+    ● Corta a corda. 
+    ● Quando o coelho come a fruta
+    ● quando o coelho não consegue comer a fruta. 
+    ● som do sopro de ar
+    ● background
+
+    bk_song = loadSound('sound1.mp3');
+    sad_sound = loadSound("sad.wav")
+    cut_sound = loadSound('rope_cut.mp3');
+    eating_sound = loadSound('eating_sound.mp3');
+    air = loadSound('air.wav');
+
+------------------------------------------ALUNO-----------------------------------------
+
+03. colocar o coelho longe da fruta para que
+    a fruta não caia diretamente sobre ele.
+
+    bunny = createSprite(420,620,100,100);
+
+04. para empurrar a fruta criaremos um botão de balão de ar, 
+    q empurrará a fruta em direção ao coelho.
+
+    blower = createImg('balloon.png');
+    blower.position(10,250);
+    blower.size(150,100);
+    blower.mouseClicked(airblow);
+
+05. como mover a fruta?
+    (criar func airblow usando applyForce())
+
+    function airblow(){
+        Matter.Body.applyForce(fruit,{x:0,y:0},{x:0.01,y:0});
+        air.play();
+    }
+
+06. add música de fundo ao nosso jogo. em setup:
+
+    bk_song.play();
+    bk_song.setVolume(0.5);
+
+07. a musica pode ser irritante. Vamos dar a opção
+    de mutar. Como? (botao)
+
+    mute_btn = createImg('mute.png');
+    mute_btn.position(450,20);
+    mute_btn.size(50,50);
+    mute_btn.mouseClicked(mute);
+
+08. func mute():
+
+    function mute(){
+    if(bk_song.isPlaying()){
+            bk_song.stop();
+        } else {
+            bk_song.play();
+        }
+    }
+
+09. add sons corte corda, coelho come, coelho triste
+
+    function drop(){
+        cut_sound.play();
+     ...
+    }
+
+    if(collide(fruit,bunny)==true){
+        bunny.changeAnimation('eating');
+        eating_sound.play();
+    }
+
+    if(collide(fruit,ground.body)==true){
+        bunny.changeAnimation('crying');
+        sad_sound.play();
+        fruit = null;
+    }
+
+
