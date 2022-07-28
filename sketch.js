@@ -69,10 +69,7 @@ function setup() {
   button.size(50,50);
   button.mouseClicked(drop);
 
-  blower = createImg('balloon.png');
-  blower.position(10,250);
-  blower.size(150,100);
-  blower.mouseClicked(airblow);
+  // 01. criar botao do blower
 
   mute_btn = createImg('mute.png');
   mute_btn.position(450,20);
@@ -173,20 +170,14 @@ function collide(body,sprite)
 
 function airblow()
 {
-  Matter.Body.applyForce(fruit,{x:0,y:0},{x:0.01,y:0});
+  // 02. adicionar força à fruta
   air.play();
 }
 
 
 function mute()
 {
-  if(bk_song.isPlaying())
-     {
-      bk_song.stop();
-     }
-     else{
-      bk_song.play();
-     }
+  // 03. adicionar if que analisa se som de background esta reproduzindo ou não
 }
 
 
